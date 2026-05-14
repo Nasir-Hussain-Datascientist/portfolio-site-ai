@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  /* Ultra-Premium Luxury Theme - Cinematic & Atmospheric */
+  --bg-main: #060608;
+  --bg-sub: #0A0A0C;
+  --bg-card: rgba(18, 18, 22, 0.6);
+  --text-main: #F7F7F8;
+  --text-sub: #A1A1AA;
+  --text-muted: #52525B;
+  
+  --brand-main: #60A5FA; /* Muted soft electric blue */
+  --brand-hover: #93C5FD;
+  --brand-text: #060608;
+  
+  --border-main: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.05);
+  
+  --font-heading: "Inter", sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  
+  --radius-main: 12px;
+  --radius-full: 9999px;
+  --border-style: solid;
+  --border-width: 1px;
+  --card-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.8), inset 0 1px 0 0 rgba(255,255,255,0.05);
+  --button-shadow: 0 0 20px rgba(96, 165, 250, 0.1);
+  --button-transform: translateY(-2px) scale(1.02);
+  --pattern-opacity: 0.02;
+  
+  /* Layout Primitives */
+  --container-width: 1280px;
+  --section-spacing: 12rem;
+  --border-radius-card: 16px;
+  --card-tilt: 0deg;
+  --header-blur: 24px;
+  --font-size-hero: 5.5rem;
+  --hero-alignment: left;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --section-spacing: 6rem;
+    --font-size-hero: 3.5rem;
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-[var(--bg-main)] text-[var(--text-sub)] antialiased font-[family-name:var(--font-body)] selection:bg-[var(--brand-main)]/30 selection:text-[var(--text-main)] overflow-x-hidden;
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-[var(--text-main)] font-[family-name:var(--font-heading)] tracking-tight;
+  }
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-gray-500;
+}
+
+.bg-gradient {
+  @apply bg-gradient-to-r from-[var(--brand-main)] to-blue-400 text-[var(--brand-text)] border-none;
+  border-radius: var(--radius-main);
+}
+
+.glass {
+  @apply bg-[var(--bg-card)] backdrop-blur-2xl border-[length:var(--border-width)] border-[style:var(--border-style)] border-[var(--border-light)];
+  border-radius: var(--radius-main);
+  box-shadow: var(--card-shadow);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(24, 24, 28, 0.8);
+}
+
+/* Background Atmosphere */
+.atmosphere {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -2;
+  background:
+    radial-gradient(ellipse at 50% -20%, rgba(96, 165, 250, 0.08) 0%, transparent 60%),
+    radial-gradient(circle at -20% 80%, rgba(96, 165, 250, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 120% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 40%);
+  filter: blur(40px);
+}
+
+:root::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -3;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, var(--pattern-opacity)) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, var(--pattern-opacity)) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+}
+
+/* Button and Interactive Resets */
+button,
+a.bg-\[var\(--brand-main\)\],
+a.border-\[length\:var\(--border-width\)\] {
+  border-radius: var(--radius-full) !important;
+  box-shadow: var(--button-shadow) !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+button:hover,
+a.bg-\[var\(--brand-main\)\]:hover,
+a.border-\[length\:var\(--border-width\)\]:hover {
+  transform: var(--button-transform) !important;
+  box-shadow: 0 0 30px rgba(96, 165, 250, 0.15) !important;
+}

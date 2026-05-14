@@ -1,0 +1,128 @@
+{
+  "entities": {
+    "Project": {
+      "title": "Project",
+      "description": "A portfolio project entry",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "fullDescription": { "type": "string" },
+        "technologies": { "type": "array", "items": { "type": "string" } },
+        "results": { "type": "string" },
+        "category": { "type": "string" },
+        "thumbnail": { "type": "string" },
+        "screenshots": { "type": "array", "items": { "type": "string" } },
+        "liveUrl": { "type": "string" },
+        "githubUrl": { "type": "string" },
+        "embedUrl": { "type": "string" },
+        "order": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "description", "category", "thumbnail"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "A project category",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "count": { "type": "number" }
+      },
+      "required": ["name"]
+    },
+    "Certification": {
+      "title": "Certification",
+      "description": "A professional certification",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "organization": { "type": "string" },
+        "issueDate": { "type": "string" },
+        "description": { "type": "string" },
+        "skills": { "type": "array", "items": { "type": "string" } },
+        "image": { "type": "string" },
+        "verificationUrl": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "organization", "image"]
+    },
+    "Blog": {
+      "title": "Blog",
+      "description": "An SEO-friendly blog post",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "slug": { "type": "string" },
+        "metaDescription": { "type": "string" },
+        "keywords": { "type": "array", "items": { "type": "string" } },
+        "content": { "type": "string" },
+        "excerpt": { "type": "string" },
+        "featuredImage": { "type": "string" },
+        "author": { "type": "string" },
+        "published": { "type": "boolean" },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "publishedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "slug", "content", "featuredImage"]
+    },
+    "Service": {
+      "title": "Service",
+      "description": "A service offered by the professional",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "iconName": { "type": "string" },
+        "benefits": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["title", "description", "iconName"]
+    },
+    "Settings": {
+      "title": "Settings",
+      "description": "Global application settings and profile information",
+      "type": "object",
+      "properties": {
+        "profilePhotoUrl": { "type": "string" },
+        "name": { "type": "string" },
+        "role": { "type": "string" },
+        "bio": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "location": { "type": "string" },
+        "linkedin": { "type": "string" },
+        "github": { "type": "string" }
+      }
+    }
+  },
+  "firestore": {
+    "settings": {
+      "schema": "Settings",
+      "description": "Global settings document (likely single doc 'global')"
+    },
+    "projects": {
+      "schema": "Project",
+      "description": "Collection of portfolio projects"
+    },
+    "categories": {
+      "schema": "Category",
+      "description": "Project categories for filtering"
+    },
+    "certifications": {
+      "schema": "Certification",
+      "description": "Professional certifications"
+    },
+    "blogs": {
+      "schema": "Blog",
+      "description": "Blog posts for SEO and expertise sharing"
+    },
+    "services": {
+      "schema": "Service",
+      "description": "Professional services offered"
+    },
+    "admins": {
+       "schema": { "type": "object", "properties": { "role": { "type": "string" } } },
+       "description": "Admin users"
+    }
+  }
+}
