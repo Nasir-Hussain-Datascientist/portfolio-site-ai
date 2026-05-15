@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, Download, Github, Linkedin, Brain, Database, BarChart, Award, Instagram, Facebook, Mail, User } from 'lucide-react';
+import { ArrowRight, Github, Linkedin, Brain, Database, BarChart, Award, Instagram, Facebook, Mail, User } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { firestoreService } from '../lib/firestore-service';
 import { useTheme } from '../contexts/ThemeContext';
@@ -100,14 +100,6 @@ export default function Home() {
                   Explore Solutions <ArrowRight size={16} />
                 </span>
               </Link>
-              <a
-                href="/Nasir_Hussain_CV.pdf"
-                target="_blank"
-                className="group flex items-center gap-3 text-white/50 hover:text-white transition-all py-4 text-xs font-semibold uppercase tracking-[0.3em] border-b border-white/5 hover:border-white/20"
-              >
-                <Download size={16} className="group-hover:-translate-y-1 transition-transform" /> 
-                Download Resume
-              </a>
             </div>
 
             <div className="flex items-center flex-wrap gap-8 pt-12 border-t border-white/5">

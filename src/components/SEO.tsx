@@ -42,6 +42,9 @@ export default function SEO({
       <meta name="twitter:description" content={finalDescription} />
       <meta name="twitter:image" content={image} />
 
+      {/* Google Search Console Verification */}
+      <meta name="google-site-verification" content="b7TE6LHH7UlKbhk8biMWIAjHO4HUgWSvgskdMk5baZY" />
+
       {/* Canonical URL */}
       <link rel="canonical" href={url} />
     </Helmet>
