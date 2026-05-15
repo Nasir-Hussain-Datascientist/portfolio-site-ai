@@ -2,7 +2,7 @@
 
 ## Profile
 - Name: Nasir Hussain
-- Role: Data Scientist | AI Engineer
+- Role: Data Scientist | Machine Learning Specialist
 - Experience: 3+ years
 - Summary: Specialist in advanced analytics, predictive modelling, and business intelligence. Worked with global leaders like Barclays, Google, Microsoft, and Amazon.
 

@@ -72,7 +72,7 @@ export default function BlogDetailPage() {
               <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-white flex items-center justify-center font-[family-name:var(--font-heading)] font-semibold text-2xl shadow-[0_0_20px_rgba(255,255,255,0.1)]">Nh</div>
               <div>
                 <div className="font-[family-name:var(--font-heading)] text-2xl text-white tracking-tight mb-1">{blog.author}</div>
-                <div className="text-[10px] uppercase font-semibold tracking-[0.3em] text-[var(--brand-main)]">Data Scientist & AI Researcher</div>
+                <div className="text-[10px] uppercase font-semibold tracking-[0.3em] text-[var(--brand-main)]">Data Scientist & Machine Learning Specialist</div>
               </div>
             </div>
             <div className="flex items-center gap-6 relative z-10">

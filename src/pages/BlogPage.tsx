@@ -67,11 +67,16 @@ export default function BlogPage() {
         {filteredBlogs.map((blog, i) => (
           <motion.article
             key={blog.id}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 30, rotateY: 10 }}
+            whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
             viewport={{ once: true, margin: "-50px" }}
+            whileHover={{ 
+              translateZ: 10,
+              rotateX: 2,
+              scale: 1.01
+            }}
             transition={{ delay: i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col gap-8 group"
+            className="flex flex-col gap-8 group preserve-3d"
           >
             <Link to={`/blog/${blog.slug}`} className="block overflow-hidden rounded-[2rem] aspect-[16/10] bg-[#09090B] border border-white/5 relative group-hover:border-white/20 transition-colors duration-700">
                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-700 z-10" />

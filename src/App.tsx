@@ -18,7 +18,6 @@ import AdminLogin from './pages/admin/AdminLogin';
 import ProtectedRoute from './components/admin/ProtectedRoute';
 import NotFound from './pages/NotFound';
 import { motion, AnimatePresence } from 'motion/react';
-import { AIChatbot } from './components/AIChatbot';
 import { ThemeGraphicOverlay } from './components/ThemeGraphicOverlay';
 
 export default function App() {
@@ -53,7 +52,6 @@ export default function App() {
           </AnimatePresence>
         </main>
         <Footer />
-        <AIChatbot />
       </div>
     </Router>
   );

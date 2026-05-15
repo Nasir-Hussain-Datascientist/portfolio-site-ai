@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, Download, Github, Linkedin, Brain, Database, BarChart, Award, Instagram, Facebook, Mail } from 'lucide-react';
+import { ArrowRight, Download, Github, Linkedin, Brain, Database, BarChart, Award, Instagram, Facebook, Mail, User } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { firestoreService } from '../lib/firestore-service';
 import { useTheme } from '../contexts/ThemeContext';
+import SEO from '../components/SEO';
 
 export default function Home() {
   const [stats, setStats] = useState({ projects: 0, certs: 0, years: 5 });
@@ -32,31 +33,30 @@ export default function Home() {
   }, []);
 
   const statsData = [
-    { label: 'Intelligence Assets', value: '3+', icon: Database },
-    { label: 'Validated Credentials', value: '20+', icon: Brain },
+    { label: 'Intelligent Assets', value: stats.projects, icon: Database },
+    { label: 'Validated Credentials', value: stats.certs, icon: Brain },
     { label: 'Academic Merit', value: 'Gold Medalist', icon: Award },
   ];
 
   const socialLinks = [
-    { id: 'linkedin', icon: Linkedin, url: settings?.linkedin },
-    { id: 'github', icon: Github, url: settings?.github },
-    { id: 'instagram', icon: Instagram, url: settings?.instagram },
-    { id: 'facebook', icon: Facebook, url: settings?.facebook },
-    { id: 'tiktok', icon: ({ size, className }: any) => (
+    { name: 'LinkedIn', icon: Linkedin, url: 'https://www.linkedin.com/in/nasirhussain-datascience/?skipRedirect=true' },
+    { name: 'GitHub', icon: Github, url: 'https://github.com/nasir-hussain-datascientist' },
+    { name: 'Facebook', icon: Facebook, url: 'https://web.facebook.com/nasir.hussain.819767' },
+    { name: 'Instagram', icon: Instagram, url: 'https://www.instagram.com/im.nasirhussain/' },
+    { name: 'TikTok', icon: ({ size, className }: any) => (
       <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
         <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
       </svg>
-    ), url: settings?.tiktok },
-    { id: 'whatsapp', icon: ({ size, className }: any) => (
-      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-        <path d="M17.5 19l4.5 3-4.5-3zM21 11.5a8.5 8.5 0 1 1-17 0 8.5 8.5 0 0 1 17 0z"></path>
-      </svg>
-    ), url: settings?.whatsapp ? `https://wa.me/${settings.whatsapp.replace(/\D/g, '')}` : null },
-    { id: 'email', icon: Mail, url: settings?.email ? `mailto:${settings.email}` : null },
-  ].filter(link => link.url);
+    ), url: 'https://www.tiktok.com/@nasir_hussain06' },
+    { name: 'Email', icon: Mail, url: 'mailto:nasir.swat.hussain@gmail.com' },
+  ];
 
   return (
     <div className="min-h-screen bg-[#060608] text-white">
+      <SEO 
+        title="Home"
+        description="Turning data into actionable insights and building intelligent systems. Explore the portfolio of Nasir Hussain."
+      />
       {/* Cinematic Hero */}
       <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
         {/* Abstract Background Elements */}
@@ -65,11 +65,12 @@ export default function Home() {
           <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-white/5 blur-[120px] rounded-full" />
         </div>
 
-        <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center relative z-10">
+        <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center relative z-10 preserve-3d">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, x: -50, rotateY: 20 }}
+            animate={{ opacity: 1, x: 0, rotateY: 0 }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            style={{ transformStyle: 'preserve-3d' }}
           >
             <motion.div 
               initial={{ opacity: 0, y: 10 }}
@@ -114,11 +115,12 @@ export default function Home() {
               <div className="flex flex-wrap gap-6">
                 {socialLinks.map((link) => (
                   <a 
-                    key={link.id} 
-                    href={link.url!} 
+                    key={link.name} 
+                    href={link.url} 
                     target="_blank" 
                     rel="noreferrer" 
                     className="text-white/40 hover:text-white transition-all transform hover:scale-110"
+                    title={link.name}
                   >
                     <link.icon size={22} strokeWidth={1} />
                   </a>
@@ -129,14 +131,14 @@ export default function Home() {
 
           {/* Profile Visual */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, filter: 'blur(20px)' }}
-            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+            initial={{ opacity: 0, scale: 0.8, rotateY: -20, rotateX: 10, translateZ: -100 }}
+            animate={{ opacity: 1, scale: 1, rotateY: 0, rotateX: 0, translateZ: 0 }}
             transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-            className="relative aspect-[4/5] w-full max-w-[540px] ml-auto group"
+            className="relative aspect-[4/5] w-full max-w-[540px] ml-auto group preserve-3d"
           >
             {/* Artistic Frame */}
-            <div className="absolute inset-4 border border-white/10 rounded-[3rem] z-20 pointer-events-none group-hover:inset-2 transition-all duration-700" />
-            <div className="absolute inset-0 bg-[#0C0C0E] rounded-[3rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] border border-white/5 flex items-center justify-center">
+            <div className="absolute inset-4 border border-white/10 rounded-[3rem] z-20 pointer-events-none group-hover:inset-0 transition-all duration-700 shadow-2xl" />
+            <div className="absolute inset-0 bg-[#0C0C0E] rounded-[3rem] overflow-hidden shadow-[0_60px_120px_-20px_rgba(0,0,0,0.8)] border border-white/5 flex items-center justify-center">
               {settings?.profilePhotoUrl ? (
                 <img 
                   src={settings.profilePhotoUrl}
@@ -178,16 +180,16 @@ export default function Home() {
           {statsData.map((stat, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 30, rotateX: 30 }}
+              whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="text-center group"
+              className="text-center group preserve-3d"
             >
               <div className="mb-8 flex justify-center">
                 <div className="w-px h-12 bg-gradient-to-b from-transparent via-white/20 to-transparent group-hover:h-16 transition-all duration-700" />
               </div>
-              <div className="text-7xl font-[family-name:var(--font-heading)] text-white mb-4 tracking-tighter font-light">{stat.value}</div>
+              <div className="text-7xl font-[family-name:var(--font-heading)] text-white mb-4 tracking-tighter font-light scale-110 group-hover:scale-125 transition-transform duration-700 drop-shadow-2xl">{stat.value}</div>
               <div className="text-white/40 text-[10px] uppercase tracking-[0.4em] font-semibold">{stat.label}</div>
             </motion.div>
           ))}

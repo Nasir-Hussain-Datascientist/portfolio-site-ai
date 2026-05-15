@@ -4,6 +4,7 @@ import { firestoreService } from '../lib/firestore-service';
 import { Certification } from '../types';
 import { ExternalLink, Award, Calendar, X } from 'lucide-react';
 import { orderBy } from 'firebase/firestore';
+import SEO from '../components/SEO';
 
 export default function CertificationsPage() {
   const [certs, setCerts] = useState<Certification[]>([]);
@@ -91,6 +92,11 @@ export default function CertificationsPage() {
 
   return (
     <div className="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto">
+      <SEO 
+        title="Certifications"
+        description="View professional certifications and credentials achieved by Nasir Hussain in Data Science, Cloud, and AI."
+        keywords="Certifications, Data Science Credentials, AI Certificates, AWS ML Specialty, Professional Development"
+      />
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}

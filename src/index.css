@@ -50,10 +50,23 @@
   body {
     @apply bg-[var(--bg-main)] text-[var(--text-sub)] antialiased font-[family-name:var(--font-body)] selection:bg-[var(--brand-main)]/30 selection:text-[var(--text-main)] overflow-x-hidden;
     transition: background-color 0.5s ease, color 0.5s ease;
+    perspective: 2000px;
   }
   
   h1, h2, h3, h4, h5, h6 {
     @apply text-[var(--text-main)] font-[family-name:var(--font-heading)] tracking-tight;
+  }
+}
+
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
   }
 }
 

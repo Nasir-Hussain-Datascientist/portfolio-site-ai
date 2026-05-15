@@ -4,6 +4,7 @@ import { firestoreService } from '../lib/firestore-service';
 import { Project, Category } from '../types';
 import { ExternalLink, Github, Layers, X, Info } from 'lucide-react';
 import { orderBy } from 'firebase/firestore';
+import SEO from '../components/SEO';
 
 export default function ProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -30,7 +31,7 @@ export default function ProjectsPage() {
       title: 'Global Supply Chain Intelligence',
       description: 'AI-driven forecasting and optimization for international tech conglomerates.',
       fullDescription: 'Developed deep learning models (TensorFlow/Keras) for demand forecasting and inventory optimization. Leveraged Google Cloud Platform to build scalable data pipelines that reduced logistics overhead for major e-commerce leaders.',
-      category: 'AI Engineering',
+      category: 'Machine Learning',
       technologies: ['TensorFlow', 'Kubernetes', 'GCP', 'BigQuery', 'Python'],
       thumbnail: 'https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?q=80&w=2070&auto=format&fit=crop',
       results: '18% Reduction in Logistics Costs',
@@ -75,6 +76,11 @@ export default function ProjectsPage() {
 
   return (
     <div className="pt-32 pb-20 px-4 md:px-8 mx-auto" style={{ maxWidth: 'var(--container-width)' }}>
+      <SEO 
+        title="Projects"
+        description="Explore the portfolio of data science and AI projects by Nasir Hussain. From risk analytics to predictive modeling."
+        keywords="Data Science Projects, Machine Learning Portfolio, AI Solutions, Predictive Modeling, Risk Analytics"
+      />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -83,7 +89,7 @@ export default function ProjectsPage() {
       >
         <span className="text-[var(--text-muted)] font-bold uppercase tracking-[0.2em] text-[10px] mb-4 block">Selected Works</span>
         <h1 className="font-[family-name:var(--font-heading)] mb-6 text-[var(--text-main)] tracking-tight" style={{ fontSize: 'var(--font-size-hero)', lineHeight: '0.9' }}>Portfolio</h1>
-        <p className="text-[var(--text-sub)] max-w-2xl mx-auto font-normal text-lg">A selection of my professional work in Machine Learning, Data Analytics, and AI Engineering.</p>
+        <p className="text-[var(--text-sub)] max-w-2xl mx-auto font-normal text-lg">A selection of my professional work in Machine Learning, Data Analytics, and Advanced Engineering.</p>
         <div className="w-16 h-[1px] bg-[var(--brand-main)] text-[var(--brand-text)] mx-auto mt-10"></div>
       </motion.div>
 
@@ -120,9 +126,15 @@ export default function ProjectsPage() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
+              whileHover={{ 
+                rotateY: 5, 
+                rotateX: -5,
+                scale: 1.02,
+                translateZ: 20
+              }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               onClick={() => setSelectedProject(project)}
-              className="bg-[#0C0C0E] overflow-hidden group cursor-pointer flex flex-col items-center transition-all duration-700 hover:z-30 relative w-full aspect-[4/5] sm:aspect-square md:aspect-[4/5] rounded-2xl border border-white/5 hover:border-white/20 shadow-2xl"
+              className="bg-[#0C0C0E] overflow-hidden group cursor-pointer flex flex-col items-center transition-all duration-700 hover:z-30 relative w-full aspect-[4/5] sm:aspect-square md:aspect-[4/5] rounded-2xl border border-white/5 hover:border-white/20 shadow-2xl preserve-3d"
             >
               {/* Image Container with smooth zoom */}
               <div className="absolute inset-0 w-full h-full overflow-hidden bg-black">
