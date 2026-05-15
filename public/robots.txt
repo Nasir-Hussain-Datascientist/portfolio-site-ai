@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://nasir-hussain.me/sitemap.xml
+Sitemap: https://nasir-hussain.com/sitemap.xml
