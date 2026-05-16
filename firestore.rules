@@ -1,88 +1,131 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    
     // 0. Default Deny
     match /{document=**} {
       allow read, write: if false;
     }
 
-    // --- Helpers ---
-    function isSignedIn() { return request.auth != null; }
-    function isAdmin() { 
-      return isSignedIn() && 
-             (request.auth.token.email == "nasir.swat.hussain@gmail.com" || 
-              request.auth.token.email == "nh4170062@gmail.com"); 
+    // 0.1 Primitives
+    function isSignedIn() {
+      return request.auth != null;
     }
-    function incoming() { return request.resource.data; }
-    function existing() { return resource.data; }
-    function isValidId(id) { return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); }
 
-    // Validation Helpers
+    function isAdmin() {
+      return isSignedIn() && 
+             request.auth.token.email_verified == true && 
+             request.auth.token.email == 'nh4170062@gmail.com';
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // --- ENTITY VALIDATIONS ---
+
     function isValidProject(data) {
-      return data.title is string && data.title.size() <= 200 &&
-             data.description is string && data.description.size() <= 1000 &&
-             data.category is string &&
-             data.thumbnail is string &&
-             data.technologies is list &&
-             (!('embedUrl' in data) || data.embedUrl is string) &&
-             data.keys().hasAll(['title', 'description', 'category', 'thumbnail', 'technologies', 'createdAt']) &&
-             data.keys().size() <= 15; // Room for optional fields
+      return data.keys().hasAll(['title', 'category', 'thumbnail']) &&
+             data.title is string && data.title.size() <= 200 &&
+             data.category is string && data.category.size() <= 100 &&
+             data.thumbnail is string && data.thumbnail.size() <= 2000;
+    }
+
+    function isValidCategory(data) {
+      return data.keys().hasAll(['name']) &&
+             data.name is string && data.name.size() <= 100;
+    }
+
+    function isValidCertification(data) {
+      return data.keys().hasAll(['title', 'organization']) &&
+             data.title is string && data.title.size() <= 200 &&
+             data.organization is string && data.organization.size() <= 200;
     }
 
     function isValidBlog(data) {
-      return data.title is string && data.title.size() <= 300 &&
+      return data.keys().hasAll(['title', 'slug', 'content']) &&
+             data.title is string && data.title.size() <= 200 &&
              data.slug is string && data.slug.size() <= 200 &&
-             data.content is string &&
-             data.keys().hasAll(['title', 'slug', 'content', 'published', 'createdAt']) &&
-             data.keys().size() <= 15;
+             data.content is string && data.content.size() <= 100000;
     }
 
-    // --- Rules ---
-
-    match /admins/{uid} {
-      allow read: if isSignedIn() && request.auth.uid == uid;
-      allow write: if false;
+    function isValidService(data) {
+      return data.keys().hasAll(['title', 'description']) &&
+             data.title is string && data.title.size() <= 200 &&
+             data.description is string && data.description.size() <= 1000;
     }
+
+    function isValidSettings(data) {
+      return data.get('name', '') is string &&
+             data.get('role', '') is string &&
+             data.get('email', '') is string;
+    }
+
+    // --- COLLECTIONS ---
 
     match /test/connection {
-      allow read: if true;
+      allow get: if true;
     }
 
     match /projects/{projectId} {
-      allow read: if true;
-      allow create: if isAdmin() && isValidId(projectId) && isValidProject(incoming()) && incoming().createdAt == request.time;
-      allow update: if isAdmin() && isValidProject(incoming());
+      allow get: if true;
+      allow list: if true;
+      allow create: if isAdmin() && isValidProject(incoming()) && isValidId(projectId) &&
+                    incoming().createdAt == request.time;
+      allow update: if isAdmin() && isValidProject(incoming()) &&
+                    incoming().updatedAt == request.time;
       allow delete: if isAdmin();
     }
 
     match /categories/{catId} {
-      allow read: if true;
-      allow write: if isAdmin();
+      allow get: if true;
+      allow list: if true;
+      allow create: if isAdmin() && isValidCategory(incoming()) && isValidId(catId);
+      allow update: if isAdmin() && isValidCategory(incoming());
+      allow delete: if isAdmin();
     }
 
     match /certifications/{certId} {
-      allow read: if true;
-      allow create: if isAdmin() && isValidId(certId) && incoming().createdAt == request.time;
-      allow update, delete: if isAdmin();
+      allow get: if true;
+      allow list: if true;
+      allow create: if isAdmin() && isValidCertification(incoming()) && isValidId(certId) &&
+                    incoming().createdAt == request.time;
+      allow update: if isAdmin() && isValidCertification(incoming()) &&
+                    incoming().updatedAt == request.time;
+      allow delete: if isAdmin();
     }
 
     match /blogs/{blogId} {
-      allow read: if true; // Public can read blogs
-      allow create: if isAdmin() && isValidId(blogId) && isValidBlog(incoming()) && incoming().createdAt == request.time;
-      allow update: if isAdmin() && isValidBlog(incoming());
+      allow get: if true;
+      allow list: if true; // In production blogs might be filtered by 'published' but we allow list for simplicity if public
+      allow create: if isAdmin() && isValidBlog(incoming()) && isValidId(blogId) &&
+                    incoming().createdAt == request.time;
+      allow update: if isAdmin() && isValidBlog(incoming()) &&
+                    incoming().updatedAt == request.time;
       allow delete: if isAdmin();
     }
 
     match /services/{serviceId} {
-      allow read: if true;
-      allow write: if isAdmin();
+      allow get: if true;
+      allow list: if true;
+      allow create: if isAdmin() && isValidService(incoming()) && isValidId(serviceId);
+      allow update: if isAdmin() && isValidService(incoming());
+      allow delete: if isAdmin();
     }
 
     match /settings/{settingId} {
-      allow read: if true;
+      allow get: if true;
       allow list: if true;
-      allow write: if isAdmin();
+      allow create, update: if isAdmin() && isValidSettings(incoming()) && isValidId(settingId) &&
+                            incoming().updatedAt == request.time;
+      allow delete: if isAdmin();
     }
   }
 }

@@ -7,7 +7,7 @@ export interface Project {
   results: string;
   category: string;
   thumbnail: string;
-  screenshots: string[];
+  screenshots?: string[];
   liveUrl?: string;
   githubUrl?: string;
   embedUrl?: string;
@@ -26,7 +26,7 @@ export interface Certification {
   title: string;
   organization: string;
   issueDate: string;
-  description: string;
+  description?: string;
   skills: string[];
   image: string;
   verificationUrl: string;

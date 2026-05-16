@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-type Theme = 'premium';
+type Theme = 'premium' | 'tenebrism' | 'coquette' | 'future-medieval' | 'doodle' | 'chinoiserie';
 
 interface ThemeContextType {
   theme: Theme;

@@ -65,7 +65,7 @@ export default function AdminDashboard() {
     
     if (activeTab === 'categories') {
       const allProjects = await firestoreService.list<Project>('projects');
-      results = results.map(cat => ({
+      results = results.map((cat: any) => ({
         ...cat,
         count: allProjects.filter(p => p.category === cat.name).length
       }));
