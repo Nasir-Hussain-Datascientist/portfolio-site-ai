@@ -19,7 +19,6 @@ import ProtectedRoute from './components/admin/ProtectedRoute';
 import NotFound from './pages/NotFound';
 import { motion, AnimatePresence } from 'motion/react';
 import { ThemeGraphicOverlay } from './components/ThemeGraphicOverlay';
-import Chatbot from './components/ui/Chatbot';
 
 export default function App() {
   return (
@@ -52,7 +51,6 @@ export default function App() {
             </Routes>
           </AnimatePresence>
         </main>
-        <Chatbot />
         <Footer />
       </div>
     </Router>
