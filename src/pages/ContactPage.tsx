@@ -100,7 +100,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto">
+    <div className="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto w-full flex-grow flex flex-col">
       <SEO 
         title="Contact"
         description="Connect with Nasir Hussain across various social platforms for collaborations or data science consultations."

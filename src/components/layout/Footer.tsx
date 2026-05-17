@@ -48,13 +48,13 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative z-10 pt-32 pb-12 bg-[#060608] border-t border-white/5 overflow-hidden perspective-1000">
+    <footer className="relative z-10 pt-12 pb-6 bg-[#060608] border-t border-white/5 overflow-hidden perspective-1000 mt-auto">
       {/* Decorative background element */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[120%] h-[500px] bg-gradient-to-t from-[var(--brand-main)]/5 to-transparent blur-[120px] pointer-events-none opacity-50" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[100%] h-[200px] bg-gradient-to-t from-[var(--brand-main)]/5 to-transparent blur-[100px] pointer-events-none opacity-40" />
       
       <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10 font-[family-name:var(--font-sans)]">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-8 mb-24 items-center">
-          <div className="md:col-span-6 space-y-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-8 mb-8 items-center">
+          <div className="md:col-span-6 space-y-6">
             <motion.div
               initial={{ opacity: 0, rotateX: 20, z: -100 }}
               whileInView={{ opacity: 1, rotateX: 0, z: 0 }}
@@ -71,10 +71,10 @@ export default function Footer() {
                   <span className="text-[10px] text-[var(--brand-main)] font-bold uppercase tracking-[0.3em] block opacity-70">Data Scientist</span>
                 </div>
               </Link>
-              <p className="text-[var(--text-sub)] max-w-md leading-relaxed font-light text-lg mb-10">
+              <p className="text-[var(--text-sub)] max-w-md leading-relaxed font-light text-base mb-6">
                 {settings?.bio || "Expert Data Scientist and Machine Learning Specialist dedicated to transforming complex challenges into intelligent analytical solutions."}
               </p>
-              <div className="flex flex-wrap gap-5">
+              <div className="flex flex-wrap gap-4">
                 {socialLinks.map((link, idx) => (
                   <motion.a
                     key={link.name}
@@ -86,10 +86,10 @@ export default function Footer() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: idx * 0.1, type: 'spring', stiffness: 300 }}
-                    className={`w-14 h-14 rounded-2xl border border-white/5 bg-white/5 flex items-center justify-center text-white/50 transition-all duration-300 ${link.color} hover:bg-white/10 hover:border-white/20 shadow-[0_10px_30px_rgba(0,0,0,0.5)]`}
+                    className={`w-12 h-12 rounded-2xl border border-white/5 bg-white/5 flex items-center justify-center text-white/50 transition-all duration-300 ${link.color} hover:bg-white/10 hover:border-white/20 shadow-[0_10px_30px_rgba(0,0,0,0.5)]`}
                     title={link.name}
                   >
-                    <link.icon size={24} strokeWidth={1.5} />
+                    <link.icon size={20} strokeWidth={1.5} />
                   </motion.a>
                 ))}
               </div>
@@ -103,19 +103,19 @@ export default function Footer() {
               viewport={{ once: true }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
               style={{ transformStyle: 'preserve-3d' }}
-              className="bg-white/5 border border-white/10 p-10 md:p-14 rounded-[3rem] shadow-[0_40px_100px_rgba(0,0,0,0.5)] relative overflow-hidden group backdrop-blur-3xl"
+              className="bg-white/5 border border-white/10 p-6 md:p-8 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.5)] relative overflow-hidden group backdrop-blur-3xl"
             >
-              <div className="absolute top-0 right-0 p-8 opacity-[0.03] rotate-12 group-hover:rotate-0 transition-transform duration-1000">
-                <Mail size={120} strokeWidth={1} />
+              <div className="absolute top-0 right-0 p-6 opacity-[0.03] rotate-12 group-hover:rotate-0 transition-transform duration-1000">
+                <Mail size={80} strokeWidth={1} />
               </div>
-              <h4 className="font-bold mb-6 text-xs uppercase tracking-[0.5em] text-white/40 relative z-10">Collaboration</h4>
-              <h3 className="text-3xl md:text-4xl font-[family-name:var(--font-heading)] text-white mb-8 tracking-tight relative z-10">Start your Journey</h3>
-              <p className="text-white/60 font-light text-lg mb-10 leading-relaxed relative z-10 max-w-sm">
+              <h4 className="font-bold mb-3 text-[10px] uppercase tracking-[0.4em] text-white/40 relative z-10">Collaboration</h4>
+              <h3 className="text-xl md:text-2xl font-[family-name:var(--font-heading)] text-white mb-4 tracking-tight relative z-10">Start your Journey</h3>
+              <p className="text-white/60 font-light text-sm mb-6 leading-relaxed relative z-10 max-w-sm">
                 Interested in high-impact data solutions or professional consulting? Reach out for major business inquiries.
               </p>
               <Link 
                 to="/contact" 
-                className="inline-flex items-center gap-4 text-xs font-bold uppercase tracking-[0.3em] text-black bg-white hover:bg-[var(--brand-main)] hover:text-white px-10 py-5 rounded-2xl transition-all duration-500 relative z-10 group shadow-[0_15px_35px_rgba(255,255,255,0.1)] active:scale-95"
+                className="inline-flex items-center gap-3 text-[9px] font-bold uppercase tracking-[0.2em] text-black bg-white hover:bg-[var(--brand-main)] hover:text-white px-6 py-3 rounded-lg transition-all duration-500 relative z-10 group shadow-[0_10px_20px_rgba(255,255,255,0.1)] active:scale-95"
               >
                 Launch Inquiry <ArrowUpRight size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
               </Link>

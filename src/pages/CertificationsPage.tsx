@@ -91,7 +91,7 @@ export default function CertificationsPage() {
   if (loading) return <div className="min-h-screen pt-32 text-center text-white/50 font-medium tracking-[0.3em] uppercase text-[10px]">Loading credentials...</div>;
 
   return (
-    <div className="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto">
+    <div className="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto w-full flex-grow flex flex-col">
       <SEO 
         title="Certifications"
         description="View professional certifications and credentials achieved by Nasir Hussain in Data Science, Cloud, and AI."

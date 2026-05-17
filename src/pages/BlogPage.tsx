@@ -31,7 +31,7 @@ export default function BlogPage() {
   if (loading) return <div className="min-h-screen pt-32 text-center text-[var(--text-sub)] font-medium tracking-[0.3em] uppercase text-[10px]">Loading Insights...</div>;
 
   return (
-    <div className="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto">
+    <div className="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto w-full flex-grow flex flex-col">
       <div className="flex flex-col md:flex-row justify-between items-end gap-12 mb-20 border-b border-white/5 pb-12">
         <motion.div
           initial={{ opacity: 0, x: -20 }}

@@ -255,26 +255,26 @@ export default function AdminDashboard() {
       {/* Edit Modal */}
       <AnimatePresence>
         {isEditing && (
-          <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-[110] flex flex-col md:items-center md:justify-center p-0 md:p-4 bg-black/90 backdrop-blur-sm">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsEditing(false)}
-              className="absolute inset-0 bg-black/90 backdrop-blur-sm"
+              className="absolute inset-0"
             />
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
-              className="relative glass max-w-4xl w-full max-h-[90dvh] overflow-hidden flex flex-col rounded-3xl"
+              className="relative glass w-full max-w-4xl flex flex-col h-[100dvh] md:h-[85vh] md:rounded-3xl overflow-hidden shadow-2xl z-10"
             >
-              <div className="flex justify-between items-center p-6 md:p-8 shrink-0 border-b border-[var(--border-light)]">
-                <h3 className="text-2xl font-bold">{editingItem?.id ? 'Edit' : 'Create'} {activeTab.slice(0, -1)}</h3>
-                <button onClick={() => setIsEditing(false)} className="p-2 hover:bg-[var(--bg-card)]/10 [border-radius:var(--radius-full)]"><X size={20} /></button>
+              <div className="flex justify-between items-center p-4 md:p-8 shrink-0 border-b border-[var(--border-light)] bg-[var(--bg-main)]/50">
+                <h3 className="text-xl md:text-2xl font-bold">{editingItem?.id ? 'Edit' : 'Create'} {activeTab.slice(0, -1)}</h3>
+                <button type="button" onClick={() => setIsEditing(false)} className="p-2 hover:bg-[var(--bg-card)]/10 rounded-full transition-colors"><X size={20} /></button>
               </div>
 
-              <div className="overflow-y-auto p-6 md:p-8 flex-1">
+              <div className="overflow-y-auto flex-1 min-h-0 p-4 md:p-8 custom-scrollbar relative bg-[var(--bg-card)]/30 backdrop-blur-md">
                 <form id="admin-form" onSubmit={handleSave} className="space-y-6">
                    {/* Dynamic Form Fields based on Collection */}
                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -302,9 +302,9 @@ export default function AdminDashboard() {
                 </form>
               </div>
 
-              <div className="p-6 md:p-8 shrink-0 border-t border-[var(--border-light)] bg-black/20 flex justify-end gap-4 rounded-b-3xl">
-                 <button type="button" onClick={() => setIsEditing(false)} className="px-6 py-2 rounded-xl border-[length:var(--border-width)] border-[style:var(--border-style)] border-[var(--border-light)] hover:bg-[var(--bg-card)]/5 transition-colors">Cancel</button>
-                 <button type="submit" form="admin-form" className="bg-brand-500 hover:bg-brand-600 px-8 py-2 rounded-xl text-[var(--text-main)] font-bold flex items-center gap-2">
+              <div className="p-4 md:p-8 shrink-0 border-t border-[var(--border-light)] bg-[var(--bg-main)]/90 backdrop-blur-3xl flex justify-end gap-3 md:gap-4 md:rounded-b-3xl">
+                 <button type="button" onClick={() => setIsEditing(false)} className="px-5 md:px-6 py-2.5 rounded-xl border border-white/10 hover:bg-white/5 transition-colors font-bold text-sm flex-1 md:flex-none">Cancel</button>
+                 <button type="submit" form="admin-form" className="bg-brand-500 hover:bg-brand-600 px-6 md:px-8 py-2.5 rounded-xl text-[var(--text-main)] font-bold flex items-center justify-center gap-2 shadow-lg shadow-brand-500/20 transition-all text-sm flex-1 md:flex-none">
                     <Save size={18} /> Save Changes
                  </button>
               </div>
@@ -411,8 +411,8 @@ function ServiceFields({ item }: { item: any }) {
 
 function SettingsFields({ item }: { item: any }) {
   return (
-    <div className="md:col-span-2 space-y-12">
-      <div className="p-12 border-2 border-dashed border-white/10 rounded-[3rem] bg-white/5">
+    <div className="md:col-span-2 space-y-8 md:space-y-12">
+      <div className="p-6 md:p-12 border-2 border-dashed border-white/10 rounded-3xl md:rounded-[3rem] bg-white/5">
          <ImageUpload 
            name="profilePhotoUrl" 
            defaultValue={item?.profilePhotoUrl} 
@@ -420,7 +420,7 @@ function SettingsFields({ item }: { item: any }) {
          />
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8 glass rounded-[2rem] border-white/5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-6 md:p-8 glass rounded-3xl md:rounded-[2rem] border-white/5">
         <div className="space-y-4">
           <label className="text-xs font-black text-brand-500 uppercase tracking-[0.3em] block ml-1">Identity</label>
           <div className="space-y-4">

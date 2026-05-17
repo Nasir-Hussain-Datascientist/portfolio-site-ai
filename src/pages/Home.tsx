@@ -168,8 +168,8 @@ export default function Home() {
       </section>
 
       {/* Numerical Impact */}
-      <section className="py-40 border-t border-white/5">
-        <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-3 gap-20">
+      <section className="py-20 md:py-32 border-t border-white/5">
+        <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 gap-16 md:gap-20 md:grid-cols-3">
           {statsData.map((stat, i) => (
             <motion.div
               key={i}
@@ -179,10 +179,10 @@ export default function Home() {
               transition={{ delay: i * 0.1, duration: 1, ease: [0.16, 1, 0.3, 1] }}
               className="text-center group preserve-3d"
             >
-              <div className="mb-8 flex justify-center">
-                <div className="w-px h-12 bg-gradient-to-b from-transparent via-white/20 to-transparent group-hover:h-16 transition-all duration-700" />
+              <div className="mb-6 flex justify-center">
+                <div className="w-px h-8 md:h-12 bg-gradient-to-b from-transparent via-white/20 to-transparent group-hover:h-12 md:group-hover:h-16 transition-all duration-700" />
               </div>
-              <div className="text-7xl font-[family-name:var(--font-heading)] text-white mb-4 tracking-tighter font-light scale-110 group-hover:scale-125 transition-transform duration-700 drop-shadow-2xl">{stat.value}</div>
+              <div className="text-5xl md:text-7xl font-[family-name:var(--font-heading)] text-white mb-4 tracking-tighter font-light scale-110 group-hover:scale-125 transition-transform duration-700 drop-shadow-2xl">{stat.value}</div>
               <div className="text-white/40 text-[10px] uppercase tracking-[0.4em] font-semibold">{stat.label}</div>
             </motion.div>
           ))}
@@ -190,9 +190,9 @@ export default function Home() {
       </section>
 
       {/* Experience Timeline Summary */}
-      <section className="py-40 border-t border-white/5 overflow-hidden">
+      <section className="py-20 md:py-32 border-t border-white/5 overflow-hidden">
         <div className="container mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -200,11 +200,11 @@ export default function Home() {
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             >
               <span className="text-[var(--brand-main)] font-semibold uppercase tracking-[0.4em] text-[10px] mb-6 block">Career Trajectory</span>
-              <h2 className="text-5xl md:text-6xl font-[family-name:var(--font-heading)] text-white mb-10 tracking-tight leading-tight">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-[family-name:var(--font-heading)] text-white mb-8 md:mb-10 tracking-tight leading-tight">
                 Architecting solutions for <br/>
                 <span className="text-white/40">Complex Data Challenges.</span>
               </h2>
-              <p className="text-[var(--text-sub)] font-light text-lg mb-12 leading-relaxed">
+              <p className="text-[var(--text-sub)] font-light text-base md:text-lg mb-8 md:mb-12 leading-relaxed">
                 As a Data Scientist, I have engineered sophisticated analytical frameworks and robust data architectures, bridging the gap between raw data and strategic intelligence for global organizations.
               </p>
             </motion.div>
@@ -214,18 +214,18 @@ export default function Home() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-white/5 border border-white/10 rounded-[3rem] p-12 md:p-16 relative overflow-hidden group"
+              className="bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden group"
             >
-              <div className="absolute top-0 right-0 p-12 opacity-5">
-                <BarChart className="w-40 h-40 text-white" strokeWidth={0.5} />
+              <div className="absolute top-0 right-0 p-8 md:p-12 opacity-5">
+                <BarChart className="w-32 h-32 md:w-40 md:h-40 text-white" strokeWidth={0.5} />
               </div>
               
               <div className="relative z-10">
-                <div className="text-[var(--brand-main)] text-[10px] uppercase tracking-[0.3em] font-bold mb-8">Current Engagement</div>
-                <h3 className="text-3xl font-[family-name:var(--font-heading)] text-white mb-2">Data Scientist</h3>
-                <div className="text-white/60 mb-8 font-light italic">FirstNetSystems • London, UK</div>
+                <div className="text-[var(--brand-main)] text-[10px] uppercase tracking-[0.3em] font-bold mb-6 md:mb-8">Current Engagement</div>
+                <h3 className="text-2xl md:text-3xl font-[family-name:var(--font-heading)] text-white mb-2">Data Scientist</h3>
+                <div className="text-white/60 mb-6 md:mb-8 font-light italic text-sm md:text-base">FirstNetSystems • London, UK</div>
                 
-                <ul className="space-y-6 text-[var(--text-sub)] font-light text-base leading-relaxed">
+                <ul className="space-y-4 md:space-y-6 text-[var(--text-sub)] font-light text-sm md:text-base leading-relaxed">
                   <li className="flex gap-4">
                     <span className="text-[var(--brand-main)]">•</span>
                     Deployed machine learning models into production using Docker & Kubernetes on AWS/GCP.
@@ -240,7 +240,7 @@ export default function Home() {
                   </li>
                 </ul>
                 
-                <Link to="/projects" className="inline-flex items-center gap-3 text-white text-xs font-bold uppercase tracking-[0.3em] mt-12 group/link">
+                <Link to="/projects" className="inline-flex items-center gap-3 text-white text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] mt-8 md:mt-12 group/link">
                   View Full Portfolio <ArrowRight size={16} className="group-hover/link:translate-x-2 transition-transform" />
                 </Link>
               </div>
@@ -250,7 +250,7 @@ export default function Home() {
       </section>
 
       {/* Philosophy */}
-      <section className="py-40 overflow-hidden relative">
+      <section className="py-20 md:py-32 overflow-hidden relative border-t border-white/5">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[var(--brand-main)]/5 blur-[150px] rounded-full pointer-events-none" />
         
         <div className="container mx-auto px-6 md:px-12 text-center relative z-10">
@@ -260,19 +260,19 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            <h2 className="text-5xl md:text-7xl lg:text-9xl font-[family-name:var(--font-heading)] mb-16 text-white leading-[0.9] tracking-tighter">
+            <h2 className="text-4xl md:text-6xl lg:text-8xl font-[family-name:var(--font-heading)] mb-10 md:mb-16 text-white leading-[0.9] tracking-tighter">
               Analytical Precision. <br/> 
               <span className="text-white/20">Actionable Intelligence.</span>
             </h2>
-            <p className="text-[var(--text-sub)] font-light text-xl md:text-2xl leading-relaxed mb-24 mx-auto max-w-3xl">
+            <p className="text-[var(--text-sub)] font-light text-lg md:text-xl leading-relaxed mx-auto max-w-2xl mb-16 md:mb-24">
               I have over 3 years of experience in Data Science, specializing in delivering advanced analytics, <span className="text-white italic">predictive modelling</span>, and business intelligence solutions for high-stakes environments.
             </p>
             
-            <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
+            <div className="flex flex-wrap justify-center gap-3 md:gap-4 max-w-4xl mx-auto">
               {['Python', 'R', 'SQL', 'TensorFlow', 'Scikit-learn', 'PyTorch', 'Apache Spark', 'Power BI', 'Tableau', 'AWS', 'GCP', 'Azure', 'MLOps', 'ETL Pipelines', 'Cyber Security'].map((tech) => (
                 <span 
                   key={tech} 
-                  className="px-8 py-3 bg-white/5 border border-white/5 rounded-full text-[10px] font-semibold tracking-[0.2em] uppercase text-white/50 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all duration-500 cursor-default"
+                  className="px-6 py-2 md:px-8 md:py-3 bg-white/5 border border-white/5 rounded-full text-[9px] md:text-[10px] font-semibold tracking-[0.2em] uppercase text-white/50 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all duration-500 cursor-default"
                 >
                   {tech}
                 </span>

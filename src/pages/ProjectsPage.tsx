@@ -75,7 +75,7 @@ export default function ProjectsPage() {
   if (loading) return <div className="min-h-screen pt-32 text-center text-[var(--text-muted)] font-medium tracking-widest text-sm uppercase">Loading Catalog...</div>;
 
   return (
-    <div className="pt-32 pb-20 px-4 md:px-8 mx-auto" style={{ maxWidth: 'var(--container-width)' }}>
+    <div className="pt-32 pb-20 px-4 md:px-8 mx-auto w-full flex-grow flex flex-col" style={{ maxWidth: 'var(--container-width)' }}>
       <SEO 
         title="Projects"
         description="Explore the portfolio of data science and AI projects by Nasir Hussain. From risk analytics to predictive modeling."
