@@ -52,7 +52,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#060608] text-white">
+    <div className="flex-grow flex flex-col bg-[#060608] text-white">
       <SEO 
         title="Home"
         description="Turning data into actionable insights and building intelligent systems. Explore the portfolio of Nasir Hussain."

@@ -123,7 +123,7 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="pt-24 min-h-screen">
+    <div className="pt-24 pb-20 flex-grow">
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-8">
         <header className="flex justify-between items-center mb-12">
           <div>
@@ -267,7 +267,7 @@ export default function AdminDashboard() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
-              className="relative glass max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-3xl p-8"
+              className="relative glass max-w-4xl w-full max-h-[85dvh] overflow-y-auto rounded-3xl p-6 md:p-8"
             >
               <div className="flex justify-between items-center mb-8">
                 <h3 className="text-2xl font-bold">{editingItem?.id ? 'Edit' : 'Create'} {activeTab.slice(0, -1)}</h3>

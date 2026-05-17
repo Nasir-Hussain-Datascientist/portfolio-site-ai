@@ -23,11 +23,11 @@ import { ThemeGraphicOverlay } from './components/ThemeGraphicOverlay';
 export default function App() {
   return (
     <Router>
-      <div className="min-h-screen relative overflow-hidden bg-[var(--bg-main)]">
+      <div className="min-h-screen relative overflow-x-hidden bg-[var(--bg-main)] flex flex-col">
         <ThemeGraphicOverlay />
         <div className="fixed inset-0 atmosphere pointer-events-none" />
         <Navbar />
-        <main className="relative z-10">
+        <main className="relative z-10 flex-grow flex flex-col">
           <AnimatePresence mode="wait">
             <Routes>
               <Route path="/" element={<Home />} />
