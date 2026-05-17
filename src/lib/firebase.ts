@@ -2,6 +2,7 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore, doc, getDocFromServer } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
+import { getAnalytics, isSupported } from 'firebase/analytics';
 import { OperationType, FirestoreErrorInfo } from '../types';
 
 const firebaseConfig = {
@@ -19,6 +20,9 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId || "(default)");
 export const auth = getAuth(app);
 export const storage = getStorage(app);
+
+// Initialize Analytics lazily (required for SSR/some environments)
+export const analytics = isSupported().then(yes => yes ? getAnalytics(app) : null);
 
 // Validation check as required by guidelines
 async function testConnection() {
