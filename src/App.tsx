@@ -27,7 +27,7 @@ export default function App() {
         <ThemeGraphicOverlay />
         <div className="fixed inset-0 atmosphere pointer-events-none" />
         <Navbar />
-        <main className="relative z-10 flex-grow flex flex-col">
+        <main className="relative z-50 flex-grow flex flex-col">
           <AnimatePresence mode="wait">
             <Routes>
               <Route path="/" element={<Home />} />

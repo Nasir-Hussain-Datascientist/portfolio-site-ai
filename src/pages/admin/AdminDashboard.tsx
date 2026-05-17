@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Project, Category, Certification, Blog, Service
@@ -253,65 +254,64 @@ export default function AdminDashboard() {
       </div>
 
       {/* Edit Modal */}
-      <AnimatePresence>
-        {isEditing && (
-          <div className="fixed inset-0 z-[110] flex flex-col md:items-center md:justify-center p-0 md:p-4 bg-black/90 backdrop-blur-sm">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsEditing(false)}
-              className="absolute inset-0"
-            />
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              className="relative glass w-full max-w-4xl flex flex-col h-[100dvh] md:h-[85vh] md:rounded-3xl overflow-hidden shadow-2xl z-10"
-            >
-              <div className="flex justify-between items-center p-4 md:p-8 shrink-0 border-b border-[var(--border-light)] bg-[var(--bg-main)]/50">
-                <h3 className="text-xl md:text-2xl font-bold">{editingItem?.id ? 'Edit' : 'Create'} {activeTab.slice(0, -1)}</h3>
-                <button type="button" onClick={() => setIsEditing(false)} className="p-2 hover:bg-[var(--bg-card)]/10 rounded-full transition-colors"><X size={20} /></button>
-              </div>
+      {isEditing && createPortal(
+        <div className="fixed inset-0 z-[110] flex flex-col md:items-center md:justify-center p-0 md:p-4 bg-black/90 backdrop-blur-sm">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsEditing(false)}
+            className="absolute inset-0"
+          />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            className="relative glass w-full max-w-4xl flex flex-col h-[100dvh] md:h-[85vh] md:rounded-3xl overflow-hidden shadow-2xl z-10"
+          >
+            <div className="flex justify-between items-center p-4 md:p-8 shrink-0 border-b border-[var(--border-light)] bg-[var(--bg-main)]/50">
+              <h3 className="text-xl md:text-2xl font-bold">{editingItem?.id ? 'Edit' : 'Create'} {activeTab.slice(0, -1)}</h3>
+              <button type="button" onClick={() => setIsEditing(false)} className="p-2 hover:bg-[var(--bg-card)]/10 rounded-full transition-colors"><X size={20} /></button>
+            </div>
 
-              <div className="overflow-y-auto flex-1 min-h-0 p-4 md:p-8 custom-scrollbar relative bg-[var(--bg-card)]/30 backdrop-blur-md">
-                <form id="admin-form" onSubmit={handleSave} className="space-y-6">
-                   {/* Dynamic Form Fields based on Collection */}
-                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      {activeTab === 'projects' && (
-                        <>
-                          <ProjectFields item={editingItem} />
-                        </>
-                      )}
-                      {activeTab === 'blogs' && (
-                        <BlogFields item={editingItem} />
-                      )}
-                      {activeTab === 'certifications' && (
-                        <CertFields item={editingItem} />
-                      )}
-                      {activeTab === 'categories' && (
-                        <CatFields item={editingItem} />
-                      )}
-                      {activeTab === 'services' && (
-                        <ServiceFields item={editingItem} />
-                      )}
-                      {activeTab === 'settings' && (
-                        <SettingsFields item={editingItem} />
-                      )}
-                   </div>
-                </form>
-              </div>
+            <div className="overflow-y-auto flex-1 min-h-0 p-4 md:p-8 custom-scrollbar relative bg-[var(--bg-card)]/30 backdrop-blur-md">
+              <form id="admin-form" onSubmit={handleSave} className="space-y-6">
+                 {/* Dynamic Form Fields based on Collection */}
+                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {activeTab === 'projects' && (
+                      <>
+                        <ProjectFields item={editingItem} />
+                      </>
+                    )}
+                    {activeTab === 'blogs' && (
+                      <BlogFields item={editingItem} />
+                    )}
+                    {activeTab === 'certifications' && (
+                      <CertFields item={editingItem} />
+                    )}
+                    {activeTab === 'categories' && (
+                      <CatFields item={editingItem} />
+                    )}
+                    {activeTab === 'services' && (
+                      <ServiceFields item={editingItem} />
+                    )}
+                    {activeTab === 'settings' && (
+                      <SettingsFields item={editingItem} />
+                    )}
+                 </div>
+              </form>
+            </div>
 
-              <div className="p-4 md:p-8 shrink-0 border-t border-[var(--border-light)] bg-[var(--bg-main)]/90 backdrop-blur-3xl flex justify-end gap-3 md:gap-4 md:rounded-b-3xl">
-                 <button type="button" onClick={() => setIsEditing(false)} className="px-5 md:px-6 py-2.5 rounded-xl border border-white/10 hover:bg-white/5 transition-colors font-bold text-sm flex-1 md:flex-none">Cancel</button>
-                 <button type="submit" form="admin-form" className="bg-brand-500 hover:bg-brand-600 px-6 md:px-8 py-2.5 rounded-xl text-[var(--text-main)] font-bold flex items-center justify-center gap-2 shadow-lg shadow-brand-500/20 transition-all text-sm flex-1 md:flex-none">
-                    <Save size={18} /> Save Changes
-                 </button>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+            <div className="p-4 md:p-8 shrink-0 border-t border-[var(--border-light)] bg-[var(--bg-main)]/90 backdrop-blur-3xl flex justify-end gap-3 md:gap-4 md:rounded-b-3xl">
+               <button type="button" onClick={() => setIsEditing(false)} className="px-5 md:px-6 py-2.5 rounded-xl border border-white/10 hover:bg-white/5 transition-colors font-bold text-sm flex-1 md:flex-none">Cancel</button>
+               <button type="submit" form="admin-form" className="bg-brand-500 hover:bg-brand-600 px-6 md:px-8 py-2.5 rounded-xl text-[var(--text-main)] font-bold flex items-center justify-center gap-2 shadow-lg shadow-brand-500/20 transition-all text-sm flex-1 md:flex-none">
+                  <Save size={18} /> Save Changes
+               </button>
+            </div>
+          </motion.div>
+        </div>,
+        document.body
+      )}
     </div>
   );
 }

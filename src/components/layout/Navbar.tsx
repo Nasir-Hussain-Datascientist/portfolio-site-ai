@@ -38,7 +38,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'py-4' : 'py-8'}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${scrolled ? 'py-4' : 'py-8'}`}>
       <div className="mx-auto px-4 md:px-8 transition-all" style={{ maxWidth: 'var(--container-width)' }}>
         <div 
           className={`transition-all duration-500 flex items-center justify-between ${scrolled ? '[border-radius:var(--radius-main)] px-8 py-4 border-b border-[var(--border-light)]' : 'bg-transparent px-2 py-2'}`}
