@@ -2,5 +2,7 @@
   "name": "Portfolio",
   "description": "A premium, SEO-optimized personal portfolio for Nasir Hussain, featuring Data Science projects, certifications, and a full-featured admin dashboard.",
   "requestFramePermissions": [],
-  "majorCapabilities": []
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }
