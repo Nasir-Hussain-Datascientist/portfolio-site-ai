@@ -25,35 +25,35 @@ export default function ContactPage() {
     { 
       name: 'LinkedIn', 
       icon: Linkedin, 
-      url: 'https://www.linkedin.com/in/nasirhussain-datascience/?skipRedirect=true',
+      url: settings?.linkedin || 'https://www.linkedin.com/in/nasirhussain-datascience/?skipRedirect=true',
       label: 'Professional Network',
       color: 'from-blue-600 to-blue-400'
     },
     { 
       name: 'GitHub', 
       icon: Github, 
-      url: 'https://github.com/nasir-hussain-datascientist',
+      url: settings?.github || 'https://github.com/nasir-hussain-datascientist',
       label: 'Open Source Projects',
       color: 'from-gray-800 to-gray-600'
     },
     { 
       name: 'WhatsApp', 
       icon: MessageCircle, 
-      url: 'https://wa.me/923451251789',
+      url: settings?.whatsapp || 'https://wa.me/923265707981',
       label: 'Quick Message',
       color: 'from-green-600 to-green-400'
     },
     { 
       name: 'Instagram', 
       icon: Instagram, 
-      url: 'https://www.instagram.com/im.nasirhussain/',
+      url: settings?.instagram || 'https://www.instagram.com/im.nasirhussain/',
       label: 'Visual Journey',
       color: 'from-purple-600 to-pink-500'
     },
     { 
       name: 'Facebook', 
       icon: Facebook, 
-      url: 'https://web.facebook.com/nasir.hussain.819767',
+      url: settings?.facebook || 'https://web.facebook.com/nasir.hussain.819767',
       label: 'Social Connect',
       color: 'from-blue-700 to-blue-500'
     },
@@ -64,14 +64,14 @@ export default function ContactPage() {
           <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
         </svg>
       ), 
-      url: 'https://www.tiktok.com/@nasir_hussain06',
+      url: settings?.tiktok || 'https://www.tiktok.com/@nasir_hussain06',
       label: 'Short Insights',
       color: 'from-black to-gray-800'
     },
     { 
       name: 'Email', 
       icon: Mail, 
-      url: 'mailto:nasir.swat.hussain@gmail.com',
+      url: settings?.email ? `mailto:${settings.email}` : 'mailto:nasir.swat.hussain@gmail.com',
       label: 'Official Inquiry',
       color: 'from-red-600 to-orange-500'
     },

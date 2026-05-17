@@ -267,45 +267,47 @@ export default function AdminDashboard() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
-              className="relative glass max-w-4xl w-full max-h-[85dvh] overflow-y-auto rounded-3xl p-6 md:p-8"
+              className="relative glass max-w-4xl w-full max-h-[90dvh] overflow-hidden flex flex-col rounded-3xl"
             >
-              <div className="flex justify-between items-center mb-8">
+              <div className="flex justify-between items-center p-6 md:p-8 shrink-0 border-b border-[var(--border-light)]">
                 <h3 className="text-2xl font-bold">{editingItem?.id ? 'Edit' : 'Create'} {activeTab.slice(0, -1)}</h3>
                 <button onClick={() => setIsEditing(false)} className="p-2 hover:bg-[var(--bg-card)]/10 [border-radius:var(--radius-full)]"><X size={20} /></button>
               </div>
 
-              <form onSubmit={handleSave} className="space-y-6">
-                 {/* Dynamic Form Fields based on Collection */}
-                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {activeTab === 'projects' && (
-                      <>
-                        <ProjectFields item={editingItem} />
-                      </>
-                    )}
-                    {activeTab === 'blogs' && (
-                      <BlogFields item={editingItem} />
-                    )}
-                    {activeTab === 'certifications' && (
-                      <CertFields item={editingItem} />
-                    )}
-                    {activeTab === 'categories' && (
-                      <CatFields item={editingItem} />
-                    )}
-                    {activeTab === 'services' && (
-                      <ServiceFields item={editingItem} />
-                    )}
-                    {activeTab === 'settings' && (
-                      <SettingsFields item={editingItem} />
-                    )}
-                 </div>
+              <div className="overflow-y-auto p-6 md:p-8 flex-1">
+                <form id="admin-form" onSubmit={handleSave} className="space-y-6">
+                   {/* Dynamic Form Fields based on Collection */}
+                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {activeTab === 'projects' && (
+                        <>
+                          <ProjectFields item={editingItem} />
+                        </>
+                      )}
+                      {activeTab === 'blogs' && (
+                        <BlogFields item={editingItem} />
+                      )}
+                      {activeTab === 'certifications' && (
+                        <CertFields item={editingItem} />
+                      )}
+                      {activeTab === 'categories' && (
+                        <CatFields item={editingItem} />
+                      )}
+                      {activeTab === 'services' && (
+                        <ServiceFields item={editingItem} />
+                      )}
+                      {activeTab === 'settings' && (
+                        <SettingsFields item={editingItem} />
+                      )}
+                   </div>
+                </form>
+              </div>
 
-                 <div className="pt-8 border-t border-[var(--border-light)] flex justify-end gap-4">
-                    <button type="button" onClick={() => setIsEditing(false)} className="px-6 py-2 rounded-xl border-[length:var(--border-width)] border-[style:var(--border-style)] border-[var(--border-light)] hover:bg-[var(--bg-card)]/5 transition-colors">Cancel</button>
-                    <button type="submit" className="bg-brand-500 hover:bg-brand-600 px-8 py-2 rounded-xl text-[var(--text-main)] font-bold flex items-center gap-2">
-                       <Save size={18} /> Save Changes
-                    </button>
-                 </div>
-              </form>
+              <div className="p-6 md:p-8 shrink-0 border-t border-[var(--border-light)] bg-black/20 flex justify-end gap-4 rounded-b-3xl">
+                 <button type="button" onClick={() => setIsEditing(false)} className="px-6 py-2 rounded-xl border-[length:var(--border-width)] border-[style:var(--border-style)] border-[var(--border-light)] hover:bg-[var(--bg-card)]/5 transition-colors">Cancel</button>
+                 <button type="submit" form="admin-form" className="bg-brand-500 hover:bg-brand-600 px-8 py-2 rounded-xl text-[var(--text-main)] font-bold flex items-center gap-2">
+                    <Save size={18} /> Save Changes
+                 </button>
+              </div>
             </motion.div>
           </div>
         )}
@@ -439,31 +441,31 @@ function SettingsFields({ item }: { item: any }) {
           <div className="space-y-4">
             <div className="space-y-2">
               <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-widest pl-1">Email</label>
-              <input name="email" defaultValue={item?.email} className="w-full glass rounded-xl px-4 py-3 text-sm focus:ring-2 ring-brand-500 outline-none transition-all placeholder:text-white/20" />
+              <input name="email" defaultValue={item?.email || 'nasir.swat.hussain@gmail.com'} className="w-full glass rounded-xl px-4 py-3 text-sm focus:ring-2 ring-brand-500 outline-none transition-all placeholder:text-white/20" />
             </div>
             <div className="space-y-4">
               <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-widest pl-1">LinkedIn Profile URL</label>
-              <input name="linkedin" defaultValue={item?.linkedin} className="w-full glass rounded-xl px-4 py-3 text-sm focus:ring-2 ring-brand-500 outline-none transition-all placeholder:text-white/20" />
+              <input name="linkedin" defaultValue={item?.linkedin || 'https://www.linkedin.com/in/nasirhussain-datascience/?skipRedirect=true'} className="w-full glass rounded-xl px-4 py-3 text-sm focus:ring-2 ring-brand-500 outline-none transition-all placeholder:text-white/20" />
             </div>
             <div className="space-y-2">
               <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-widest pl-1">GitHub URL</label>
-              <input name="github" defaultValue={item?.github} className="w-full glass rounded-xl px-4 py-3 text-sm focus:ring-2 ring-brand-500 outline-none transition-all placeholder:text-white/20" />
+              <input name="github" defaultValue={item?.github || 'https://github.com/nasir-hussain-datascientist'} className="w-full glass rounded-xl px-4 py-3 text-sm focus:ring-2 ring-brand-500 outline-none transition-all placeholder:text-white/20" />
             </div>
             <div className="space-y-2">
-              <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-widest pl-1">WhatsApp Number</label>
-              <input name="whatsapp" defaultValue={item?.whatsapp} className="w-full glass rounded-xl px-4 py-3 text-sm focus:ring-2 ring-brand-500 outline-none transition-all placeholder:text-white/20" placeholder="+92 ..." />
+              <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-widest pl-1">WhatsApp URL</label>
+              <input name="whatsapp" defaultValue={item?.whatsapp || 'https://wa.me/923265707981'} className="w-full glass rounded-xl px-4 py-3 text-sm focus:ring-2 ring-brand-500 outline-none transition-all placeholder:text-white/20" placeholder="https://wa.me/92..." />
             </div>
             <div className="space-y-2">
               <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-widest pl-1">Instagram URL</label>
-              <input name="instagram" defaultValue={item?.instagram} className="w-full glass rounded-xl px-4 py-3 text-sm focus:ring-2 ring-brand-500 outline-none transition-all placeholder:text-white/20" />
+              <input name="instagram" defaultValue={item?.instagram || 'https://www.instagram.com/im.nasirhussain/'} className="w-full glass rounded-xl px-4 py-3 text-sm focus:ring-2 ring-brand-500 outline-none transition-all placeholder:text-white/20" />
             </div>
             <div className="space-y-2">
               <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-widest pl-1">TikTok URL</label>
-              <input name="tiktok" defaultValue={item?.tiktok} className="w-full glass rounded-xl px-4 py-3 text-sm focus:ring-2 ring-brand-500 outline-none transition-all placeholder:text-white/20" />
+              <input name="tiktok" defaultValue={item?.tiktok || 'https://www.tiktok.com/@nasir_hussain06'} className="w-full glass rounded-xl px-4 py-3 text-sm focus:ring-2 ring-brand-500 outline-none transition-all placeholder:text-white/20" />
             </div>
             <div className="space-y-2">
               <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-widest pl-1">Facebook URL</label>
-              <input name="facebook" defaultValue={item?.facebook} className="w-full glass rounded-xl px-4 py-3 text-sm focus:ring-2 ring-brand-500 outline-none transition-all placeholder:text-white/20" />
+              <input name="facebook" defaultValue={item?.facebook || 'https://web.facebook.com/nasir.hussain.819767'} className="w-full glass rounded-xl px-4 py-3 text-sm focus:ring-2 ring-brand-500 outline-none transition-all placeholder:text-white/20" />
             </div>
           </div>
         </div>
