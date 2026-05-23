@@ -18,11 +18,19 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const location = useLocation();
+  const [settings, setSettings] = useState<any>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     
+    // Load Settings
+    import('../../lib/firestore-service').then(({ firestoreService }) => {
+      firestoreService.list('settings').then((data) => {
+        if (data.length > 0) setSettings(data[0]);
+      }).catch(console.error);
+    });
+
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user && user.email?.toLowerCase().endsWith('@gmail.com')) {
         setIsAdmin(true);
@@ -50,11 +58,11 @@ export default function Navbar() {
         >
           <Link to="/" className="flex items-center gap-4 group">
             <div className="w-10 h-10 bg-white text-black flex items-center justify-center font-[family-name:var(--font-heading)] font-bold text-lg rounded-full transition-all duration-500 shadow-[0_0_20px_rgba(255,255,255,0.2)] group-hover:scale-110">
-              Nh
+              {settings?.name ? settings.name[0] : 'N'}
             </div>
             <div className="hidden sm:block">
-              <span className="font-[family-name:var(--font-heading)] font-semibold text-sm block leading-none text-white tracking-[0.2em] uppercase">Nasir Hussain</span>
-              <span className="text-[9px] text-[var(--brand-main)] uppercase tracking-[0.3em] font-semibold mt-1.5 block opacity-70 group-hover:opacity-100 transition-opacity">Senior Data Scientist</span>
+              <span className="font-[family-name:var(--font-heading)] font-semibold text-sm block leading-none text-white tracking-[0.2em] uppercase">{settings?.name || "Nasir Hussain"}</span>
+              <span className="text-[9px] text-[var(--brand-main)] uppercase tracking-[0.3em] font-semibold mt-1.5 block opacity-70 group-hover:opacity-100 transition-opacity">{settings?.role || "Senior Data Scientist"}</span>
             </div>
           </Link>
 

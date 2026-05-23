@@ -73,7 +73,8 @@ export const firestoreService = {
         ...data,
         updatedAt: serverTimestamp(),
       }, { merge: true });
-    } catch (error) {
+    } catch (error: any) {
+      alert("Error saving: " + error?.message);
       handleFirestoreError(error, OperationType.WRITE, `${collectionName}/${id}`);
     }
   },
