@@ -275,9 +275,9 @@ export default function AdminDashboard() {
             </div>
 
             <div className="overflow-y-auto flex-1 min-h-0 p-4 md:p-8 custom-scrollbar relative bg-[var(--bg-card)]/30 backdrop-blur-md">
-              <form id="admin-form" onSubmit={handleSave} className="space-y-6 flex flex-col h-full">
+              <form id="admin-form" onSubmit={handleSave} className="space-y-6">
                  {/* Dynamic Form Fields based on Collection */}
-                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow">
+                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {activeTab === 'projects' && (
                       <>
                         <ProjectFields item={editingItem} />
@@ -299,15 +299,14 @@ export default function AdminDashboard() {
                       <SettingsFields item={editingItem} />
                     )}
                  </div>
-                 
-                 {/* Moving buttons inside the form to ensuring React captures the onSubmit */}
-                 <div className="mt-8 pt-6 shrink-0 border-t border-[var(--border-light)] flex justify-end gap-3 md:gap-4">
-                   <button type="button" onClick={() => setIsEditing(false)} className="px-5 md:px-6 py-2.5 rounded-xl border border-white/10 hover:bg-white/5 transition-colors font-bold text-sm flex-1 md:flex-none">Cancel</button>
-                   <button type="submit" className="bg-brand-500 hover:bg-brand-600 px-6 md:px-8 py-2.5 rounded-xl text-[var(--text-main)] font-bold flex items-center justify-center gap-2 shadow-lg shadow-brand-500/20 transition-all text-sm flex-1 md:flex-none">
-                      <Save size={18} /> Save Changes
-                   </button>
-                 </div>
               </form>
+            </div>
+
+            <div className="p-4 md:p-8 shrink-0 border-t border-[var(--border-light)] bg-[var(--bg-main)]/90 backdrop-blur-3xl flex justify-end gap-3 md:gap-4 md:rounded-b-3xl">
+               <button type="button" onClick={() => setIsEditing(false)} className="px-5 md:px-6 py-2.5 rounded-xl border border-white/10 hover:bg-white/5 transition-colors font-bold text-sm flex-1 md:flex-none">Cancel</button>
+               <button type="submit" form="admin-form" className="bg-brand-500 hover:bg-brand-600 px-6 md:px-8 py-2.5 rounded-xl text-[var(--text-main)] font-bold flex items-center justify-center gap-2 shadow-lg shadow-brand-500/20 transition-all text-sm flex-1 md:flex-none">
+                  <Save size={18} /> Save Changes
+               </button>
             </div>
           </motion.div>
         </div>,
