@@ -71,55 +71,37 @@ service cloud.firestore {
     match /projects/{projectId} {
       allow get: if true;
       allow list: if true;
-      allow create: if isAdmin() && isValidProject(incoming()) && isValidId(projectId) &&
-                    incoming().createdAt == request.time;
-      allow update: if isAdmin() && isValidProject(incoming()) &&
-                    incoming().updatedAt == request.time;
-      allow delete: if isAdmin();
+      allow write: if isAdmin();
     }
 
     match /categories/{catId} {
       allow get: if true;
       allow list: if true;
-      allow create: if isAdmin() && isValidCategory(incoming()) && isValidId(catId);
-      allow update: if isAdmin() && isValidCategory(incoming());
-      allow delete: if isAdmin();
+      allow write: if isAdmin();
     }
 
     match /certifications/{certId} {
       allow get: if true;
       allow list: if true;
-      allow create: if isAdmin() && isValidCertification(incoming()) && isValidId(certId) &&
-                    incoming().createdAt == request.time;
-      allow update: if isAdmin() && isValidCertification(incoming()) &&
-                    incoming().updatedAt == request.time;
-      allow delete: if isAdmin();
+      allow write: if isAdmin();
     }
 
     match /blogs/{blogId} {
       allow get: if true;
       allow list: if true; // In production blogs might be filtered by 'published' but we allow list for simplicity if public
-      allow create: if isAdmin() && isValidBlog(incoming()) && isValidId(blogId) &&
-                    incoming().createdAt == request.time;
-      allow update: if isAdmin() && isValidBlog(incoming()) &&
-                    incoming().updatedAt == request.time;
-      allow delete: if isAdmin();
+      allow write: if isAdmin();
     }
 
     match /services/{serviceId} {
       allow get: if true;
       allow list: if true;
-      allow create: if isAdmin() && isValidService(incoming()) && isValidId(serviceId);
-      allow update: if isAdmin() && isValidService(incoming());
-      allow delete: if isAdmin();
+      allow write: if isAdmin();
     }
 
     match /settings/{settingId} {
       allow get: if true;
       allow list: if true;
-      allow create, update: if isAdmin() && isValidSettings(incoming()) && isValidId(settingId) &&
-                            incoming().updatedAt == request.time;
-      allow delete: if isAdmin();
+      allow write: if isAdmin();
     }
   }
 }
