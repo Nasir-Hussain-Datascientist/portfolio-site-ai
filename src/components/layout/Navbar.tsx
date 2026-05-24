@@ -32,7 +32,7 @@ export default function Navbar() {
     });
 
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user && user.email?.toLowerCase().endsWith('@gmail.com')) {
+      if (user) {
         setIsAdmin(true);
       } else {
         setIsAdmin(false);

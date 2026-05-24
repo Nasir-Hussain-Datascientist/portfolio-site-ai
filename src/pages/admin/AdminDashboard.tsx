@@ -42,13 +42,8 @@ export default function AdminDashboard() {
         return;
       }
 
-      if (user.email?.toLowerCase().endsWith('@gmail.com')) {
-        setIsAdmin(true);
-        loadData();
-      } else {
-        auth.signOut();
-        navigate('/admin/login');
-      }
+      setIsAdmin(true);
+      loadData();
     });
 
     return () => unsubscribe();
