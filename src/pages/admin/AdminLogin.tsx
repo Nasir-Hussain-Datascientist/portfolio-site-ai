@@ -23,12 +23,6 @@ export default function AdminLogin() {
     setError(null);
     
     try {
-      if (!email.toLowerCase().endsWith('@gmail.com')) {
-        setError('Only Gmail accounts are permitted for admin access.');
-        setLoading(false);
-        return;
-      }
-
       await signInWithEmailAndPassword(auth, email, password);
       navigate('/admin');
     } catch (err: any) {

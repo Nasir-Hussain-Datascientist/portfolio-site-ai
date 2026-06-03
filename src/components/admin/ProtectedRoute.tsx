@@ -1,25 +1,13 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { auth } from '../../lib/firebase';
+import { Navigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
 
-export default function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const [loading, setLoading] = useState(true);
-  const [authorized, setAuthorized] = useState(false);
-  const navigate = useNavigate();
+interface ProtectedRouteProps {
+  children: React.ReactNode;
+  requireAdmin?: boolean;
+}
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user && user.email?.toLowerCase().endsWith('@gmail.com')) {
-        setAuthorized(true);
-      } else {
-        if (user) console.warn('Unauthorized access attempt: non-gmail account');
-        navigate('/admin/login');
-      }
-      setLoading(false);
-    });
-
-    return () => unsubscribe();
-  }, [navigate]);
+export default function ProtectedRoute({ children, requireAdmin = false }: ProtectedRouteProps) {
+  const { user, loading, isAdmin } = useAuth();
 
   if (loading) {
     return (
@@ -29,5 +17,13 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
     );
   }
 
-  return authorized ? <>{children}</> : null;
+  if (!user) {
+    return <Navigate to="/admin/login" />;
+  }
+
+  if (requireAdmin && !isAdmin) {
+    return <Navigate to="/" />;
+  }
+
+  return <>{children}</>;
 }

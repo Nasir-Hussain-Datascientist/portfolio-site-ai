@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, Database, User, Briefcase, FileText, Mail, Shield, Award } from 'lucide-react';
-import { auth } from '../../lib/firebase';
+import { useAuth } from '../../contexts/AuthContext';
 
 const navLinks = [
   { name: 'Home', path: '/', icon: User },
@@ -16,7 +16,7 @@ const navLinks = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const { isAdmin } = useAuth();
   const location = useLocation();
   const [settings, setSettings] = useState<any>(null);
 
@@ -31,17 +31,8 @@ export default function Navbar() {
       }).catch(console.error);
     });
 
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        setIsAdmin(true);
-      } else {
-        setIsAdmin(false);
-      }
-    });
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      unsubscribe();
     };
   }, []);
 

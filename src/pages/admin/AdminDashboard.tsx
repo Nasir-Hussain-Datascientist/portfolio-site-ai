@@ -10,10 +10,9 @@ import {
   Settings, LogOut, ChevronRight, Save, X, Image as ImageIcon,
   Database, User
 } from 'lucide-react';
-import { auth } from '../../lib/firebase';
 import { useNavigate } from 'react-router-dom';
-import { onAuthStateChanged } from 'firebase/auth';
 import { ImageUpload } from '../../components/admin/ImageUpload';
+import { useAuth } from '../../contexts/AuthContext';
 
 type Tab = 'projects' | 'categories' | 'certifications' | 'blogs' | 'services' | 'settings';
 
@@ -23,8 +22,8 @@ export default function AdminDashboard() {
   const [data, setData] = useState<any[]>([]);
   const [isEditing, setIsEditing] = useState(false);
   const [editingItem, setEditingItem] = useState<any | null>(null);
-  const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
+  const { user, isAdmin, logout } = useAuth();
 
   const tabs: { id: Tab, label: string, icon: any }[] = [
     { id: 'projects', label: 'Projects', icon: Layout },
@@ -34,20 +33,6 @@ export default function AdminDashboard() {
     { id: 'services', label: 'Services', icon: Database },
     { id: 'settings', label: 'Settings', icon: Settings },
   ];
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        navigate('/admin/login');
-        return;
-      }
-
-      setIsAdmin(true);
-      loadData();
-    });
-
-    return () => unsubscribe();
-  }, [navigate]);
 
   useEffect(() => {
     if (isAdmin) {
@@ -77,7 +62,7 @@ export default function AdminDashboard() {
   }
 
   const handleLogout = async () => {
-    await auth.signOut();
+    await logout();
     navigate('/');
   };
 

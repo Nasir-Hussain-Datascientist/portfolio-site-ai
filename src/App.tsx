@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Home from './pages/Home';
@@ -19,8 +19,11 @@ import ProtectedRoute from './components/admin/ProtectedRoute';
 import NotFound from './pages/NotFound';
 import { motion, AnimatePresence } from 'motion/react';
 import { ThemeGraphicOverlay } from './components/ThemeGraphicOverlay';
+import { useAuth } from './contexts/AuthContext';
 
 export default function App() {
+  const { user } = useAuth();
+
   return (
     <Router>
       <div className="min-h-screen relative overflow-x-hidden bg-[var(--bg-main)] flex flex-col">
@@ -39,9 +42,9 @@ export default function App() {
               <Route path="/contact" element={<ContactPage />} />
               
               {/* Admin Routes */}
-              <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/admin/login" element={user ? <Navigate to="/admin" /> : <AdminLogin />} />
               <Route path="/admin" element={
-                <ProtectedRoute>
+                <ProtectedRoute requireAdmin>
                   <AdminDashboard />
                 </ProtectedRoute>
               } />
